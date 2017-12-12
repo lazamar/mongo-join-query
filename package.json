@@ -27,6 +27,9 @@
         "gulp-organiser": "^1.1.0",
         "gulp-shell": "^0.6.3",
         "jasmine-spec-reporter": "^4.2.1",
-        "ramda": "^0.25.0"
+        "mongoose": "^4.13.7",
+        "ramda": "^0.25.0",
+        "ramda-fantasy": "^0.8.0",
+        "root-require": "^0.3.1"
     }
 }

@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const {
     connect, disconnect, find, create, remove
 } = require("root-require")("./lib/db");
-const customFind = require("root-require")("./lib/utils");
+const customFind = require("root-require")("./lib/customFind");
 
 describe("", () => {
     let connection;
@@ -320,6 +320,35 @@ describe("", () => {
                 .fork(done.fail, done);
         });
 
+        it("does not create artefacts in empty single fields when deep populating them", done => {
+            const testTeam = {
+                name: "testTeam",
+                leader: null,
+                members: [],
+                allMembers: players,
+                represents: null,
+                championships: 10
+            };
+            let created;
+
+            create(Team, testTeam)
+                .chain(t => {
+                    created = t;
+                    return customFind(Team, {
+                        populate: ["leader.studiedAt", "represents"],
+                        find: { _id: created._id.toString() }
+                    });
+                })
+                .map(({ results }) => {
+                    expect(results.length).toBe(1);
+                    expect(results[0].leader).toBe(undefined);
+                    expect(results[0].represents).toBe(undefined);
+                    return results;
+                })
+                .chain(() => remove(created))
+                .fork(done.fail, done);
+        });
+
         it("removes empty object artifacts from arrays and fields, as well as nulls from arrays", done => {
             const asCustomFindResult = results => [{ count: results.length, results }];
 
@@ -369,6 +398,35 @@ describe("", () => {
                     expect(results.length).toBe(1);
                     expect(results[0].name).toBe(testTeam.name);
                     expect(results[0].members.length).toBe(0);
+                    return results;
+                })
+                .chain(() => remove(created))
+                .fork(done.fail, done);
+        });
+
+        it("allows searching for empty deeply populated single fields", done => {
+            const testTeam = {
+                name: "testTeam",
+                leader: null,
+                members: [],
+                allMembers: players,
+                represents: schools[1],
+                championships: 10
+            };
+
+            let created;
+            create(Team, testTeam)
+                .chain(t => {
+                    created = t;
+                    return customFind(Team, {
+                        populate: ["leader.studiedAt"],
+                        find: { leader: null }
+                    });
+                })
+                .map(({ results }) => {
+                    expect(results.length).toBe(1);
+                    expect(results[0].name).toBe(testTeam.name);
+                    expect(results[0].leader).toBe(null);
                     return results;
                 })
                 .chain(() => remove(created))

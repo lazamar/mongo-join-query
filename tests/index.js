@@ -423,6 +423,18 @@ describe("", () => {
                 })
                 .fork(done.fail, done);
         });
+
+        it("throws when trying to populate an invalid field", done => {
+            customFind(Team, {
+                find: {},
+                populate: ["leader.nonExistent"]
+            }).fork(err => {
+                expect(err.name).toBe("Invalid query");
+                expect(err.message).toContain("Invalid population path");
+                done();
+                return err;
+            }, done.fail);
+        });
     });
 
     it("disconnects successfully", done => {

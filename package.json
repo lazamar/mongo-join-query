@@ -4,9 +4,7 @@
     "description": "Joins in mongo",
     "main": "index.js",
     "scripts": {
-        "test:unit": "gulp jasmine-test-node:unit",
-        "test:integration": "gulp jasmine-test-node:integration",
-        "test": "yarn test:unit && yarn test:integration",
+        "test": "gulp jasmine-test-node",
         "lint": "gulp lint"
     },
     "repository": {},

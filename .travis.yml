@@ -4,7 +4,7 @@ node_js:
 
 env:
   matrix:
-    - MONGODB=3.4.3
+    - MONGODB=3.4.0
     - MONGODB=3.5.5
 
 matrix:

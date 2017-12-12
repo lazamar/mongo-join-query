@@ -1,31 +1,15 @@
-const mongoose = require("mongoose");
-const Future = require("fluture");
+const customFind = require("./lib/customFind");
 
-const connect = () => {
-    const isDisconnected = mongoose.connection.readyState === 0;
-    if (isDisconnected) {
-        mongoose.connect("mongodb://localhost/test");
-    }
-
-    return new Future((reject, resolve) => {
-        mongoose.connection.once("open", () => resolve(mongoose.connection));
-        mongoose.connection.once("error", reject);
-    });
-};
-
-const disconnect = () =>
-    Future((reject, resolve) => {
-        mongoose.connection.close(resolve);
-    });
-
-const personSchema = mongoose.Schema({
-    name: String,
-    age: Number
-});
-
-const Person = mongoose.model("Person", personSchema);
-
-connect()
-    .map(() => console.log("Connected! Oh Yeah!"))
-    .chain(disconnect)
-    .fork(console.log, console.log);
+/*
+Options structure:
+{
+   find: {}, // search object
+   sort, // sort object
+   skip = 0, // int
+   limit = 50, // int
+   select,
+   populate: [] // array of string ["contact.created_by", ...]
+}
+ */
+module.exports = (Model, options, callback) =>
+    customFind(Model, options).fork(err => callback(err), result => callback(null, result));

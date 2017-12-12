@@ -1,6 +1,27 @@
 language: node_js
-services: mongodb
-before_script:
-  - yarn install
 node_js:
   - "8.8.1"
+
+env:
+  matrix:
+    - MONGODB=3.4.3
+    - MONGODB=3.5.5
+
+matrix:
+  fast_finish: true
+
+install:
+  - wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-${MONGODB}.tgz
+  - tar xzf mongodb-linux-x86_64-${MONGODB}.tgz
+  - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --version
+
+before_script:
+  - mkdir ${PWD}/mongodb-linux-x86_64-${MONGODB}/data
+  - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --dbpath ${PWD}/mongodb-linux-x86_64-${MONGODB}/data --logpath ${PWD}/mongodb-linux-x86_64-${MONGODB}/mongodb.log --fork
+  - yarn install
+
+script:
+  - yarn test
+
+after_script:
+  - pkill mongod

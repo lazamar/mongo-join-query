@@ -1,5 +1,7 @@
 # mongo-join
 
+![Travis-CI](https://travis-ci.org/lazamar/mongo-join.svg?branch=master)
+
 Allows you to query your database using linked collections in your query.
 
 Imagine in your database you have Teams with Players and each Player went to a different school.

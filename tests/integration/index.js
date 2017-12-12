@@ -341,37 +341,11 @@ describe("", () => {
                 })
                 .map(({ results }) => {
                     expect(results.length).toBe(1);
-                    expect(results[0].leader).toBe(undefined);
-                    expect(results[0].represents).toBe(undefined);
+                    expect(results[0].leader).toBe(null);
+                    expect(results[0].represents).toBe(null);
                     return results;
                 })
                 .chain(() => remove(created))
-                .fork(done.fail, done);
-        });
-
-        it("removes empty object artifacts from arrays and fields, as well as nulls from arrays", done => {
-            const asCustomFindResult = results => [{ count: results.length, results }];
-
-            const queryResult = asCustomFindResult([
-                {
-                    nullValue: null,
-                    arrayWithArtefact: [null],
-                    emptyObject: {}
-                }
-            ]);
-
-            spyOn(Team, "aggregate").and.callFake(() => ({
-                exec: callback => setImmediate(() => callback(null, queryResult))
-            }));
-
-            customFind(Team, {})
-                .map(({ results }) => {
-                    expect(results.length).toBe(1);
-                    expect(results[0].nullValue).toBe(null);
-                    expect(results[0].arrayWithArtefact.length).toBe(0);
-                    expect(results[0].emptyObject).toBe(undefined);
-                    return results;
-                })
                 .fork(done.fail, done);
         });
 

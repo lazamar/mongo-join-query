@@ -35,8 +35,7 @@ const Team = mongoose.model(
         championships: Number,
         leader: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Player",
-            required: true
+            ref: "Player"
         },
         members: [
             {
@@ -54,8 +53,7 @@ const Team = mongoose.model(
         ],
         represents: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "School",
-            required: true
+            ref: "School"
         }
     })
 );

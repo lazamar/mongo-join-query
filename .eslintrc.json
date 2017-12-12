@@ -1,0 +1,55 @@
+{
+    "extends": ["airbnb"],
+    "plugins": ["html", "prettier"],
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+    },
+    "globals": {},
+    "rules": {
+        "no-return-assign": [0],
+        "max-len": ["error", { "code": 100, "ignoreUrls": true }],
+        "operator-linebreak": [2, "before"],
+        "no-multiple-empty-lines": 0,
+        "no-bitwise": 0,
+        "strict": [0, "function"],
+        "arrow-body-style": [0, "always"],
+        "arrow-parens": [2, "as-needed"],
+        "no-use-before-define": [
+            2,
+            {
+                "functions": true,
+                "classes": true,
+                "variables": true
+            }
+        ],
+        "space-before-function-paren": 0,
+        "no-console": "error",
+        "complexity": [1, 4],
+        "func-names": 0,
+        "quotes": [1, "double"],
+        "no-unused-vars": [
+            2,
+            {
+                "argsIgnorePattern": "^_"
+            }
+        ],
+        "no-confusing-arrow": 0,
+        "no-nested-ternary": 0,
+        "react/prop-types": 0,
+        "comma-dangle": [
+            2,
+            {
+                "arrays": "never",
+                "objects": "never",
+                "imports": "never",
+                "exports": "never",
+                "functions": "never"
+            }
+        ],
+        "indent": [2, 4],
+        "no-underscore-dangle": 0,
+        "jsx-a11y/href-no-hash": "off"
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "name": "mongo-join",
+    "version": "1.0.0",
+    "description": "Joins in mongo",
+    "main": "index.js",
+    "scripts": {
+        "test:unit": "gulp jasmine-test-node:unit",
+        "test:integration": "gulp jasmine-test-node:integration",
+        "test": "yarn test:unit && yarn test:integration",
+        "lint": "gulp lint"
+    },
+    "repository": {},
+    "author": "Marcelo Lazaroni - @lazamar",
+    "license": "MIT",
+    "dependencies": {
+        "eslint": "^4.13.1",
+        "eslint-config-airbnb": "^16.1.0",
+        "eslint-plugin-html": "^4.0.1",
+        "eslint-plugin-import": "^2.8.0",
+        "eslint-plugin-jsx-a11y": "^6.0.2",
+        "eslint-plugin-prettier": "^2.3.1",
+        "eslint-plugin-react": "^7.5.1",
+        "fluture": "^7.2.2",
+        "glob": "^7.1.2",
+        "gulp": "^3.9.1",
+        "gulp-jasmine": "^2.4.2",
+        "gulp-organiser": "^1.1.0",
+        "gulp-shell": "^0.6.3",
+        "jasmine-spec-reporter": "^4.2.1",
+        "ramda": "^0.25.0"
+    }
+}

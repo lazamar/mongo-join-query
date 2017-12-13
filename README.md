@@ -9,7 +9,7 @@ Imagine in your database you have Teams linked by ID to Players, which are linke
 What if you want all teams with players that went to a school founded after 1950? Or if you wanted a
 team object with all members embedded? What if their school were also embedded to them?
 
-`mongo-join-query` allows you to do exactly that.
+`mongo-join-query` allows you to do exactly that. You can populate as many levels deep as you want.
 
 **Note**: You need to be using Mongoose to specify your database schema.
 

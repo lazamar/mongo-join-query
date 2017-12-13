@@ -1,6 +1,6 @@
 {
     "name": "mongo-join-query",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Joins in mongo",
     "main": "index.js",
     "scripts": {

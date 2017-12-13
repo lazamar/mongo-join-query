@@ -111,7 +111,7 @@ The callback takes two arguments:
     }
 ```
 
-## Example
+## Full Example
 
 Here is an example:
 
@@ -245,5 +245,3 @@ function callback(error, res) {
      */
 }
 ```
-
-# Warning!

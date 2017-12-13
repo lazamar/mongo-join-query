@@ -29,6 +29,23 @@ mongoJoin(
 );
 ```
 
+## How does it work?
+
+Behind the scenes the options object is transformed in different stages in an
+[aggregation pipeline](https://docs.mongodb.com/v3.4/aggregation/).
+
+To see the entire aggregation pipeline being used add `debug: true` to the options object.
+
+## Limits and Contributing
+
+You can populate an array field if it is a property of the main Model of the query. But you cannot
+populate an array field of linked models.
+
+This is a shortcoming of the current implementation of the `$group` phase of the aggregation. If you
+would like to contribute with this project, this is the place to look at.
+
+When contributing please make sure to include a failing test int he pull request.
+
 ## Docs
 
 The library exposes a single function which accepts three arguments:
@@ -65,7 +82,9 @@ const options =
         // How many documents to skip
         skip: 10,
         // Maximum number of documents to be returned
-        limit: 1
+        limit: 1,
+        // If debug is true, it will print the aggregation pipeline used in the query.
+        debug: false
     },
 ```
 

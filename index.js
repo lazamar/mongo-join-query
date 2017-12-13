@@ -8,7 +8,8 @@ Options structure:
    skip = 0, // int
    limit = 50, // int
    select,
-   populate: [] // array of string ["contact.created_by", ...]
+   populate: [] // array of string ["contact.created_by", ...],
+   debug: false
 }
  */
 module.exports = (Model, options, callback) =>

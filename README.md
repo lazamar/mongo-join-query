@@ -4,16 +4,16 @@
 
 Allows you to query your database using linked collections in your query.
 
-Imagine in your database you have Teams with Players and each Player went to a different school.
+Imagine in your database you have Teams linked by ID to Players, which are linked by ID to Schools.
 
-Imagine you have a different model for each of these entities.
+What if you want all teams with players that went to a school founded after 1950? Or if you wanted a
+team object with all members embedded? What if their school were also embedded to them?
 
-What if you want to search for teams based on the players' school? Or if you wanted a team object
-with all members and the leader embedded? What if their school were also embedded to them?
-
-This allows you to do exactly that.
+`mongo-join-query` allows you to do exactly that.
 
 **Note**: You need to be using Mongoose to specify your database schema.
+
+**Note**: Requires Mongo >= v3.4.
 
 ```javascript
 mongoJoin(

@@ -1,6 +1,6 @@
-# mongo-join
+# mongo-join-query
 
-![Travis-CI](https://travis-ci.org/lazamar/mongo-join.svg?branch=master)
+![Travis-CI](https://travis-ci.org/lazamar/mongo-join-query.svg?branch=master)
 
 Allows you to query your database using linked collections in your query.
 
@@ -117,7 +117,7 @@ Here is an example:
 
 ```javascript
 const m = require("mongoose");
-const mongoJoin = require("mongo-join");
+const mongoJoin = require("mongo-join-query");
 
 const School = m.model(
     "School",

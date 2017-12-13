@@ -1,5 +1,5 @@
 {
-    "name": "mongo-join",
+    "name": "mongo-join-query",
     "version": "1.0.0",
     "description": "Joins in mongo",
     "main": "index.js",

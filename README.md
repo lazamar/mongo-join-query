@@ -11,7 +11,90 @@ Imagine you have a different model for each of these entities.
 What if you want to search for teams based on the players' school? Or if you wanted a team object
 with all members and the leader embedded? What if their school were also embedded to them?
 
-This is what this extension allows you. Here is an example:
+This allows you to do exactly that.
+
+**Note**: You need to be using Mongoose to specify your database schema.
+
+```javascript
+mongoJoin(
+    mongoose.models.Team,
+    {
+        find: { "members.studiedAt.yearFounded": { $gt: 1950 } },
+        populate: ["members.studiedAt", "leader.studiedAt"],
+        sort: { "members.age": 1 },
+        skip: 10,
+        limit: 1
+    },
+    (err, res) => (err ? console.log("Error:", err) : console.log("Success", res))
+);
+```
+
+## Docs
+
+The library exposes a single function which accepts three arguments:
+
+```javascript
+mongoJoin(
+    mongoose.models.Team, // The mongoose model on which to do the query
+    options, // an options object
+    callback // A callback
+);
+```
+
+### Options
+
+```javascript
+// The options object accepts the follwing fields:
+const options =
+    {
+        // A query where you can treat all populated paths as
+        // embedded documents
+        find: { "members.studiedAt.yearFounded": { $gt: 1950 } },
+        // A list of strings defining all the paths you would like to populate.
+        // In this case we are populating the `members` field in Team and
+        // inside the members field we are populating `studiedAt`.
+        //
+        // If you want to populate multiple paths in subdocuments, just
+        // list the entire paths. For example, imagine you want to populate
+        // `members` and inside each member you want to populate both `studiedAt`
+        // and `bestFriend`. You would use an array like this:
+        //  ["members.studiedAt", "members.bestFriend"]
+        populate: ["members.studiedAt", "leader.studiedAt"],
+        // What you would normally pass to .sort()
+        sort: { "members.age": 1 },
+        // How many documents to skip
+        skip: 10,
+        // Maximum number of documents to be returned
+        limit: 1
+    },
+```
+
+### Callback
+
+The callback takes two arguments:
+
+* **error** - An error object. If there is no error it will be `null`. If there is an error, it will
+  looks like this:
+
+```javascript
+    {   name: 'Invalid query',
+        message: 'Invalid population path: Field nonExistent not found.',
+        errors: []
+    }
+```
+
+* **result** - If there is an error, the result will be null. If there isn't it will look like this:
+
+```javascript
+    {   name: 'Invalid query',
+        message: 'Invalid population path: Field nonExistent not found.',
+        errors: []
+    }
+```
+
+## Example
+
+Here is an example:
 
 ```javascript
 const m = require("mongoose");
@@ -143,3 +226,5 @@ function callback(error, res) {
      */
 }
 ```
+
+# Warning!
